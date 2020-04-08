@@ -20,7 +20,7 @@ body {
 
 .user {
   position: relative;
-  width: 32rem;
+  width: 37rem;
   margin: 1rem 0rem 1rem 2rem;
   padding: 1rem;
   background-color: #fff;
@@ -29,11 +29,10 @@ body {
   transition: all 2s ease-in;
 }
 
-.user:nth-child(1) img {
-}
-
 .user span {
+  display: inline-block;
   transition: all 5s ease-in;
+  width: 95%;
 }
 
 img {
@@ -55,7 +54,7 @@ img {
 }
 .user:first-child .iconDown {
   position: absolute;
-  top: 31px;
+  top: 20px;
 }
 .user:last-child .iconUp {
   position: absolute;
@@ -182,7 +181,7 @@ img {
 .example-appear-active {
   opacity: 1;
   transition: opacity 100ms ease-in;
-  background-color: rgb(98, 15, 98);
+  background-color: rgb(144, 144, 144);
 }
 
 .heading-appear {
