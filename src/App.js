@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { CSSTransition } from "react-transition-group";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import Users from "./Components/Users";
 import TimeTravel from "./Components/TimeTravel";
 import "./App.css";
@@ -99,9 +99,9 @@ export default class App extends Component {
     const actions = this.secondState.prevActions;
     actions.unshift({
       action:
-        "Moved post " +
+        "Moved post '" +
         user.title +
-        " from index " +
+        "' from index " +
         id +
         " to index " +
         user.id,
@@ -130,29 +130,53 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="header">
-        <div className="clip"></div>
-        <h1 className="title">Sortable Post List</h1>
-        <CSSTransition timeout={300} appear={true} classNames="fade">
-          <div className="container">
-            <Users
-              users={this.state.users}
-              swapDown={this.swapDown}
-              swapUp={this.swapUp}
-              timeTravelUp={this.timeTravelUp}
-              timeTravelDown={this.timeTravelDown}
-              back={this.back}
-              reserve={this.reserve}
-            />
+      <TransitionGroup>
+        <div className="header">
+          <div className="clip"></div>
+          <CSSTransition
+            in={true}
+            appear={true}
+            timeout={1000}
+            classNames="heading"
+          >
+            <h1 className="title">Sortable Post List</h1>
+          </CSSTransition>
+          <CSSTransition
+            timeout={300}
+            appear={true}
+            classNames={{
+              appear: "example-appear",
+              appearActive: "example-appear-active",
 
-            <TimeTravel
-              upState={this.secondState.prevActions}
-              back={this.back}
-              users={this.state.users}
-            />
-          </div>
-        </CSSTransition>
-      </div>
+              enter: "example-enter",
+              enterActive: "example-enter-active",
+              enterDone: "example-enter-done",
+
+              exit: "example-exit-active",
+              exitActive: "example-exit-active",
+              exitDone: "example-exit-done",
+            }}
+          >
+            <div className="container">
+              <Users
+                users={this.state.users}
+                swapDown={this.swapDown}
+                swapUp={this.swapUp}
+                timeTravelUp={this.timeTravelUp}
+                timeTravelDown={this.timeTravelDown}
+                back={this.back}
+                reserve={this.reserve}
+              />
+
+              <TimeTravel
+                upState={this.secondState.prevActions}
+                back={this.back}
+                users={this.state.users}
+              />
+            </div>
+          </CSSTransition>
+        </div>
+      </TransitionGroup>
     );
   }
 }

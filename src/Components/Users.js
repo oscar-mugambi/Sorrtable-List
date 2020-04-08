@@ -1,4 +1,5 @@
 import React from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import "./style.css";
 import up from "./Icons/up.svg";
 import down from "./Icons/down.svg";
@@ -13,93 +14,82 @@ export default function Items({
   back,
   reserve,
 }) {
-  const userList = users.length ? (
-    users.map((user) => {
-      return (
-        <div className="user" key={user.id}>
-          <span className="transition">{user.title}</span>
-          {user.id !== 1 ? (
-            <img
-              className="iconUp"
-              alt="up"
-              src={up}
-              onClick={() => {
-                swapUp(user.id);
-                timeTravelUp(user);
-                reserve("up", user.id);
-              }}
-            />
-          ) : (
-            <img
-              hidden
-              className="iconDown"
-              alt="down"
-              src={down}
-              onClick={() => {
-                swapDown(user.id);
-                timeTravelDown(user);
-                reserve("down", user.id);
-              }}
-            />
-          )}
-          {user.id !== 5 ? (
-            <img
-              className="iconDown"
-              alt="down"
-              src={down}
-              onClick={() => {
-                swapDown(user.id);
-                timeTravelDown(user);
-                reserve("down", user.id);
-              }}
-            />
-          ) : (
-            <img
-              hidden
-              className="iconDown"
-              alt="down"
-              src={down}
-              onClick={() => {
-                swapDown(user.id);
-                timeTravelDown(user);
-                reserve("down", user.id);
-              }}
-            />
-          )}
-        </div>
-      );
-    })
-  ) : (
-    <p>No Users available</p>
-  );
-
   return (
-    <Spring
-      from={{ opacity: 0, marginTop: -500 }}
-      to={{ opacity: 1, marginTop: 0 }}
-    >
-      {(props) => (
-        <div style={props}>
-          <div className="user-container">
-            <Transition
-              native
-              items={true}
-              from={{ opacity: 0 }}
-              enter={{ opacity: 1 }}
-              leave={{ opacity: 0 }}
-            >
-              {(show) =>
-                show &&
-                ((props) => (
-                  <animated.div style={props}>
-                    <div className={props}>{userList}</div>
-                  </animated.div>
-                ))
-              }
-            </Transition>
-          </div>
-        </div>
-      )}
-    </Spring>
+    <div>
+      <TransitionGroup>
+        {users.map((user, index) => (
+          <CSSTransition
+            key={"css" + index}
+            in={true}
+            timeout={100}
+            appear={true}
+            classNames={{
+              appear: "example-appear",
+              appearActive: "example-appear-active",
+
+              enter: "example-enter",
+              enterActive: "example-enter-active",
+              enterDone: "example-enter-done",
+
+              exit: "example-exit-active",
+              exitActive: "example-exit-active",
+              exitDone: "example-exit-done",
+            }}
+          >
+            <div className="user" key={user.id}>
+              <span className="transition">{user.title}</span>
+              {user.id !== 1 ? (
+                <img
+                  className="iconUp"
+                  alt="up"
+                  src={up}
+                  onClick={() => {
+                    swapUp(user.id);
+                    timeTravelUp(user);
+                    reserve("up", user.id);
+                  }}
+                />
+              ) : (
+                <img
+                  hidden
+                  className="iconDown"
+                  alt="down"
+                  src={down}
+                  onClick={() => {
+                    swapDown(user.id);
+                    timeTravelDown(user);
+                    reserve("down", user.id);
+                  }}
+                />
+              )}
+              {user.id !== 5 ? (
+                <img
+                  className="iconDown"
+                  alt="down"
+                  src={down}
+                  onClick={() => {
+                    swapDown(user.id);
+                    timeTravelDown(user);
+                    reserve("down", user.id);
+                  }}
+                />
+              ) : (
+                <img
+                  hidden
+                  className="iconDown"
+                  alt="down"
+                  src={down}
+                  onClick={() => {
+                    swapDown(user.id);
+                    timeTravelDown(user);
+                    reserve("down", user.id);
+                  }}
+                />
+              )}
+            </div>
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
+    </div>
   );
 }

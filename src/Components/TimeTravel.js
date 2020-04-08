@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 import { Spring, Transition, animated } from "react-spring/renderprops";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 export default function TimeTravel({ upState, back, users }) {
   const timeTravelData = upState.length ? (
@@ -27,8 +28,8 @@ export default function TimeTravel({ upState, back, users }) {
       </div>
     </div>
   ) : (
-    <div className="timeTravel">
-      <p>Click the scroll arrows to start time travelling</p>
+    <div className="timeTravelBlank">
+      <p>Click the scroll button to display Time Travel Menu</p>
     </div>
   );
 

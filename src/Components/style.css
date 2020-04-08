@@ -65,12 +65,13 @@ img {
 .timeTravel {
   position: relative;
   width: 37rem;
-  margin: -2rem 0rem 1rem 2rem;
+  margin: 1rem 0rem 1rem 2rem;
   padding-bottom: 1.5rem;
   background-color: rgb(233, 233, 233);
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
 }
+
 .actions {
   position: relative;
   background-color: #fff;
@@ -118,14 +119,14 @@ img {
   font-size: 0.9rem;
 }
 
-p {
-  text-align: center;
-  color: rgb(15, 15, 15);
-  font-weight: 600;
-  font-size: 1.2rem;
+.timeTravelBlank {
+  position: relative;
+  right: -10rem;
+  top: 10rem;
+  color: black;
 }
 
-.fade-appear {
+/* .fade-appear {
   opacity: 0;
   z-index: 1;
 }
@@ -142,4 +143,57 @@ p {
 .fade-enter.fade.enter-active {
   opacity: 1;
   transition: opacity 300ms linear;
+} */
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter-active {
+  opacity: 1;
+  transition: opacity 2000ms ease-in;
+}
+
+.example-enter-done {
+  opacity: 1;
+  background-color: #f3f3f3;
+}
+
+.example-exit {
+  opacity: 1;
+  background-color: lightskyblue;
+  color: white;
+}
+
+.example-exit-active {
+  opacity: 0.01;
+  transition: opacity 2000ms ease-in 500ms;
+  background-color: rebeccapurple;
+  color: white;
+}
+
+.example-exit-done {
+  opacity: 0.01;
+}
+
+.example-appear {
+  opacity: 0.01;
+}
+
+.example-appear-active {
+  opacity: 1;
+  transition: opacity 100ms ease-in;
+  background-color: rgb(98, 15, 98);
+}
+
+.heading-appear {
+  color: purple;
+}
+
+.heading-appear-active {
+  color: blue;
+  transition: color 1s linear;
+}
+
+.heading-enter-done {
+  color: white;
 }
